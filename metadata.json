@@ -1,0 +1,8 @@
+{
+  "name": "Thaynara Brito - Fisioterapia Premium",
+  "description": "Landing page mobile-first de alta conversão para a fisioterapeuta Thaynara Brito, focada em agendamento de consultas via WhatsApp.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
