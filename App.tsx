@@ -49,7 +49,8 @@ const PalmLeaf: React.FC<{ className?: string; opacity?: number }> = ({ classNam
     animate={{ rotate: [-2, 2, -2], y: [0, 5, 0] }}
     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
     className={`absolute pointer-events-none z-0 ${className}`}
-    style={{ opacity }}
+    // Fix: Cast style to any to resolve 'opacity' not existing on MotionStyle in some environments
+    style={{ opacity } as any}
   >
     <svg viewBox="0 0 200 200" className="w-full h-full fill-brand-primary">
       <path d="M10,190 C40,150 100,120 190,10 C160,80 120,130 10,190 Z M190,10 L160,50 M180,20 L140,40 M170,30 L120,30" stroke="currentColor" strokeWidth="1" fill="none" />
@@ -63,7 +64,8 @@ const HangingFern: React.FC<{ className?: string; opacity?: number }> = ({ class
     animate={{ y: [-5, 10, -5], rotate: [-1, 1, -1] }}
     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
     className={`absolute pointer-events-none z-0 ${className}`}
-    style={{ opacity }}
+    // Fix: Cast style to any to resolve 'opacity' not existing on MotionStyle in some environments
+    style={{ opacity } as any}
   >
     <svg viewBox="0 0 120 200" className="w-full h-full fill-brand-primary">
       <path d="M60,0 Q60,100 20,180 M60,0 Q60,90 100,170" stroke="currentColor" strokeWidth="1.5" fill="none" />
@@ -396,7 +398,8 @@ const Trust: React.FC = () => (
           >
             <PalmLeaf className="w-20 h-20 -bottom-4 -right-4 opacity-5 group-hover:opacity-15 transition-opacity" />
             <div className="w-12 h-12 bg-brand-primary text-brand-light rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              {React.cloneElement(card.icon as React.ReactElement, { className: "w-6 h-6" })}
+              {/* Fix: Cast icon to ReactElement<any> to allow passing className via cloneElement */}
+              {React.cloneElement(card.icon as React.ReactElement<any>, { className: "w-6 h-6" })}
             </div>
             <h3 className="text-xl font-bold text-brand-primary mb-3">{card.title}</h3>
             <p className="text-brand-muted leading-relaxed">{card.desc}</p>
@@ -612,7 +615,7 @@ export default function App() {
           <PalmLeaf className="w-48 h-48 top-10 left-0 opacity-10 -rotate-12" />
           <PalmLeaf className="w-56 h-56 top-0 left-1/3 opacity-10" />
           <div className="container mx-auto px-6 text-center relative z-10">
-            <h2 className="text-3xl md:text-4xl font-serif mb-8 leading-tight">Pronto para começar sua transformação?</h2>
+            <h2 className="text-3xl md:text-4xl font-serif mb-8 leading-tight">Pronto para começar sua transformation?</h2>
             <div className="flex justify-center">
               <CTAButton secondary text="Agendar minha avaliação agora" />
             </div>
